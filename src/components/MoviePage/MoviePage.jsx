@@ -160,7 +160,7 @@ const MoviePage = ({match}) => {
 
     const movieData = useCachedApiCall(API_KEY, "https://api.themoviedb.org/3");
     const movie = movieData.response;
-    // console.log
+    console.log({movie})
     // const movie = movie_details_placeholder;    
     
     useEffect(()=>{
