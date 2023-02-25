@@ -15,10 +15,11 @@ export default function useCachedApiCall(API_KEY, path_prefix = "") {
     releaseYearEnd = ""
   ) => {
     if (api_path) {
-      setLoading(true);
-      setError(false);
-      setErrorMsg("");
-      setResponse(null);
+//       setLoading(true);
+//       setError(false);
+//       setErrorMsg("");
+//       setResponse(null);
+      console.log(api_path,path_prefix);
       axios
 //         .get(
 //           `${path_prefix}${api_path}&api_key=${API_KEY}&with_genres=${_genre}&primary_release_date.gte=${releaseYearStart}&primary_release_date.lte=${releaseYearEnd}&with_runtime.gte=90`
