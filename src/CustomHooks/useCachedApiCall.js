@@ -20,10 +20,14 @@ export default function useCachedApiCall(API_KEY, path_prefix = "") {
 //       setErrorMsg("");
 //       setResponse(null);
       console.log(api_path,path_prefix);
+      const _url = `${path_prefix}${api_path}&api_key=${API_KEY}&with_genres=${_genre}&primary_release_date.gte=${releaseYearStart}&primary_release_date.lte=${releaseYearEnd}&with_runtime.gte=90`
       console.log(  `${path_prefix}${api_path}&api_key=${API_KEY}&with_genres=${_genre}&primary_release_date.gte=${releaseYearStart}&primary_release_date.lte=${releaseYearEnd}&with_runtime.gte=90`)
       axios
-        .get(
-          `https://api.themoviedb.org/3${api_path}&api_key=${API_KEY}&with_genres=${_genre}&primary_release_date.gte=${releaseYearStart}&primary_release_date.lte=${releaseYearEnd}&with_runtime.gte=90`
+//         .get(
+//           `https://api.themoviedb.org/3${api_path}&api_key=${API_KEY}&with_genres=${_genre}&primary_release_date.gte=${releaseYearStart}&primary_release_date.lte=${releaseYearEnd}&with_runtime.gte=90`
+//         )
+              .get(
+          _url
         )
 //        .get(
 //          'https://api.themoviedb.org/3/discover/movie?api_key=2b7be3a2f5b8c75236be6a4e648ca9b2&with_genres=28&primary_release_date.gte=2022-01-01&primary_release_date.lte=2022-12-31' )
