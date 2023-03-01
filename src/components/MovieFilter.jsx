@@ -76,7 +76,7 @@ const MovieFilter = ({ movieSearch, trendingData }) => {
                 setReleaseYearStart(date);
                 setYearStart(date.toISOString().split("T")[0]);
 
-                console.log({ date: date.toISOString().split("T")[0] });
+//                 console.log({ date: date.toISOString().split("T")[0] });
               }}
             />
           </div>
