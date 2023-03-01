@@ -10,9 +10,6 @@ const MovieCard = ({movie, media_type}) => {
     const rating_percent = ("vote_average" in movie) ? (parseInt(movie.vote_average)*10) : null;
     const release_date = movie.release_date || movie.first_air_date;
     const release_year = release_date && release_date.substr(0, 4);
-    
-    // const _media_type = movie.media_type || media_type;
-    // const link = (movie.id && _media_type)? `/${_media_type}/${movie.id}` : "";
     const link = `movie/${movie.id}`;
 
     return ( 
