@@ -9,11 +9,9 @@ import MovieSearchPage from "./components/MovieSearchPage/MovieSearchPage";
 
 
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
-console.log(API_KEY);
 
 function App() {
   const trendingData = useCachedApiCall(API_KEY, "https://api.themoviedb.org/3");
-  console.log(trendingData);
   const movieSearch = useMovieSearch();
 
   return (
@@ -29,7 +27,7 @@ function App() {
                   render={(props)=>{
                       switch(props.match.params.media_type){
                         case "movie":
-                        // case "tv":
+                        case "tv":
                           return <MoviePage {...props}/>
                         default:
                           return <Redirect to="/"/>
