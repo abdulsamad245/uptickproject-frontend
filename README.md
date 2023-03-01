@@ -1,4 +1,4 @@
-# The Movie Search
+# The Movie Search App
 The Movie Search is a responsive [React](https://reactjs.org/) app that shows details about your favourite movies using data from [TMDb](https://www.themoviedb.org) API.
 
 ## Demo
