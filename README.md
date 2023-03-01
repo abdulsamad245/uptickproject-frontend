@@ -20,7 +20,7 @@ To build and run this you will need [Node.js](https://nodejs.org/en/) and npm in
 * install the dependencies, enter the directory and run ```npm install```
 * Create a .env file at the root of the project.
 * Replace REACT_APP_TMDB_API_KEY with your actual TMDB API key.
-* Start the app. run ````npm start```. This will start the app on http://localhost:3000
+* Start the app. run ```npm start```. This will start the app on http://localhost:3000
 
 ## Built With
 
