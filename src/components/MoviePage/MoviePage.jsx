@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import useCachedApiCall from "../../CustomHooks/useCachedApiCall";
 import RatingRing from "../RatingRing/RatingRing";
-import MovieGalleryHorizontal from "../GalleryHorizontal/MovieGalleryHorizontal";
-import VideoGallery from "../GalleryHorizontal/VideoGallery";
-import SeasonsGallery from "../GalleryHorizontal/SeasonsGallery";
 import {get_poster_url, get_backdrop_url, get_profile_url, format_date, get_lang_name} from "../../utilities";
 import male_icon from "./male-64.png";
 import female_icon from "./female-64.png";
@@ -78,93 +75,19 @@ const Profile = ({cast}) => {
     return <img src={get_profile_pic()} alt="" className="profile-pic"/>;
 }
 
-const FullCastCrew = ({credits}) => {
-    const cast_list = credits && credits.cast;
-    const crew_list = credits && credits.crew;
-    return (
-        <div className="modal fade" id="fullCastCrewModal">
-            <div className="modal-dialog modal-lg modal-dialog-scrollable">
-                <div className="modal-content">
-                
-                    <div className="modal-header">
-                        <div className="modal-title">Cast and Crew</div>
-                        <button type="button" className="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    
-                    <div className="modal-body">
-                        <div className="list-heading">Cast</div>
-                        <ul className="cast-list">
-                        {cast_list && cast_list.map((cast, i)=><li key={i}><Profile cast={cast}/><span className="cast-name">{cast.name}</span><span className="cast-role">{cast.character}</span></li>)}
-                        </ul>
-                        <div className="list-heading">Crew</div>
-                        <ul className="cast-list">
-                        {crew_list && crew_list.map((crew, i)=><li key={i}><Profile cast={crew}/><span className="cast-name">{crew.name}</span><span className="cast-role">{crew.job}</span></li>)}
-                        </ul>
-                    </div>                
-
-                </div>
-            </div>
-        </div>
-    );
-}
-
-const CastList = ({credits}) => {
-    const cast_list = credits && credits.cast;
-    const cast_list_limit = 5;
-
-    return (
-        <React.Fragment>
-        {cast_list &&
-            <div className="section">
-                <div className="section-heading">Cast</div>                
-                <ul className="cast-list">
-                    {
-                        cast_list.map((cast, i)=>{
-                            if(i<cast_list_limit){
-                                return (
-                                    <li key={i}>
-                                        {/* <img src={get_profile_url(cast.profile_path)} alt=""/> */}
-                                        <Profile cast={cast}/>
-                                        {cast.name}
-                                    </li>
-                                );
-                            }
-                        })
-                    }
-                </ul>
-                <button className="more-cast-btn" data-toggle="modal" data-target="#fullCastCrewModal">See more...</button>
-                <FullCastCrew credits={credits}/>
-            </div>
-        }
-        </React.Fragment>        
-    );
-}
-
-const VideoSection = ({videos}) => {
-    return (
-            <React.Fragment>
-                {videos && videos.results && videos.results.length &&
-                    <div className="section">
-                        <div className="section-heading">Videos</div>
-                        <VideoGallery videos={videos.results}/>
-                    </div>
-                }
-            </React.Fragment>  
-    );
-}
-
 const MoviePage = ({match}) => {
     const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
     const id = match.params.id;
     const  media_type = match.params.media_type;
 
-    const movieData = useCachedApiCall(API_KEY, "https://api.themoviedb.org/3");
+    const movieData = useCachedApiCall(API_KEY, "http://api.themoviedb.org/3");
     const movie = movieData.response;
-    // console.log
+    console.log({movie})
     // const movie = movie_details_placeholder;    
     
     useEffect(()=>{
-        movieData.apiCall(`/${media_type}/${id}?`);
+        const response = movieData.apiCall(`/${media_type}/${id}?`);
+        console.log(response);
     },[match.params.id, match.params.media_type]);
 
     
@@ -175,7 +98,6 @@ const MoviePage = ({match}) => {
             {movieData.error && 
             <div className="text-center">
                 <div className="error-msg">{(movieData.errorMsg)? movieData.errorMsg: "Something went wrong!"}</div>
-                {/* <button onClick={reload} className="btn btn-sm btn-light mt-4">Reload</button> */}
             </div>
             }
             {movie &&
@@ -187,32 +109,8 @@ const MoviePage = ({match}) => {
                             <div className="section-heading">Plot</div>
                             <div>{movie.overview}</div>                                                           
                         </div> 
-                        <CastList credits={movie.credits}/> 
                     </div> 
 
-                    {movie.seasons && 
-                        <div className="section">
-                            <div className="section-heading">Seasons</div>
-                            <SeasonsGallery seasons={movie.seasons}/>
-                        </div>
-                    }
-
-                    {/* <VideoSection videos={movie.videos}/>  */}
-
-                    {/*--------------------- Recommended section------------------------- */}
-                    {/* {movie.recommendations && movie.recommendations.results && movie.recommendations.results.length!==0 &&
-                        <div className="section">
-                            <div className="section-heading">You may also like</div>
-                            <MovieGalleryHorizontal movies={movie.recommendations.results} media_type={media_type}/>
-                        </div>                        
-                    } */}
-
-                    {/* {movie.similar && movie.similar.results && movie.similar.results.length!==0 &&
-                        <div className="section">
-                            <div className="section-heading">Similar</div>
-                            <MovieGalleryHorizontal movies={movie.similar.results}  media_type={media_type}/>                            
-                        </div>                        
-                    } */}
                     
                 </div>
             } 
