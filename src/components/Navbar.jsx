@@ -7,10 +7,7 @@ const Navbar = () => {
             <Link  className="navbar-brand" to="/">Movies Search App</Link>
             <ul className="navbar-nav ml-auto">                
                 <li className="nav-item">
-                    <Link to="/" className="nav-link">Home</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/search" className="nav-link">Search</Link>
+                    <Link to="/" className="nav-link">About</Link>
                 </li>
             </ul>
         </nav>
